@@ -1,0 +1,10 @@
+.container
+  .row
+    %h3 User 
+    %p
+      = "Name #{@user.name if @user.name}"
+    %p
+      = "Email #{@user.email if @user.email}"
+    %a{:class => "btn btn-default", :href => "#{edit_user_registration_path}", :role => "button"} Change
+  .row 
+    %a{:class => "btn btn-primary", :href => "#{edit_user_registration_path}", :role => "button"} New post

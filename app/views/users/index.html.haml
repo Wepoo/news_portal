@@ -1,0 +1,8 @@
+%h3 Users
+%table
+  %tbody
+    - @users.each do |user|
+      %tr 
+        = user.name
+      %tr  
+        = user.email
