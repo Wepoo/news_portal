@@ -2,9 +2,9 @@
   .row
     %h3 User 
     %p
-      = "Name #{@user.name if @user.name}"
+      = "Name: #{@user.login if @user.login}"
     %p
-      = "Email #{@user.email if @user.email}"
-    %a{:class => "btn btn-default", :href => "#{edit_user_registration_path}", :role => "button"} Change
-  .row 
-    %a{:class => "btn btn-primary", :href => "#{edit_user_registration_path}", :role => "button"} New post
+      = "Email: #{@user.email if @user.email}"
+    - if @user.id == current_user.id
+      %a{:class => "btn btn-default", :href => "#{edit_user_registration_path}", :role => "button"} Change info
+      %a{:class => "btn btn-primary", :href => "#{new_article_path}", :role => "button"} New post
