@@ -7,10 +7,11 @@
   <h2><%= @article.title%></h2>
   <strong><%= @article.description %></strong>
   <p><%= @article.full_text %></p>
-  <h4><%= @article.rating%></h4>
+  <h4 id="rating"><%= @article.votes_for.size %></h4>
+  <a id="like-btn" class="btn btn-default" onclick="like()" role="button">Like</a>
 </div>
 
-<%- if @article.user_id == current_user.id%>
+<%- if user_signed_in? && @article.user_id == current_user.id %>
 <%= link_to t('.back', :default => t("helpers.links.back")),
               articles_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
