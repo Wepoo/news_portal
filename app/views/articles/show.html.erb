@@ -7,10 +7,15 @@
   <h2><%= @article.title%></h2>
   <strong><%= @article.description %></strong>
   <p><%= @article.full_text %></p>
-  <h4><%= @article.rating%></h4>
+  <h4 id="rating"><%= @article.votes_for.size %> users liked this</h4>
+
+  <%- unless current_user.voted_for? @article %>
+    <%= link_to "Like", article_path, id: "like", remote: true, role: "button", class: "btn btn-default" %>
+  <% end %>
+  <h4>Posted by <%= link_to @article.user.login, @article.user %> at <%= @article.created_at %></h4>
 </div>
 
-<%- if @article.user_id == current_user.id%>
+<%- if user_signed_in? && @article.user_id == current_user.id %>
 <%= link_to t('.back', :default => t("helpers.links.back")),
               articles_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -21,3 +26,4 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 <% end %>
+
