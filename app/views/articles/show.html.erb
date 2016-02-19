@@ -9,7 +9,7 @@
   <p><%= @article.full_text %></p>
   <h4 id="rating"><%= @article.votes_for.size %> users liked this</h4>
 
-  <%- unless current_user.voted_for? @article %>
+  <%- if user_signed_in? && !(current_user.voted_for? @article) %>
     <%= link_to "Like", article_path, id: "like", remote: true, role: "button", class: "btn btn-default" %>
   <% end %>
   <h4>Posted by <%= link_to @article.user.login, @article.user %> at <%= @article.created_at %></h4>
