@@ -12,7 +12,8 @@
   <%- if user_signed_in? && !(current_user.voted_for? @article) %>
     <%= link_to "Like", article_path, id: "like", remote: true, role: "button", class: "btn btn-default" %>
   <% end %>
-  <h4>Posted by <%= link_to @article.user.login, @article.user %> at <%= @article.created_at %></h4>
+  <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+  <h4>Posted by <%= link_to @article.user.name, @article.user %> at <%= @article.created_at %></h4>
 </div>
 
 <%- if user_signed_in? && @article.user_id == current_user.id %>
