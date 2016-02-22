@@ -7,12 +7,13 @@
       = "Email: #{@user.email if @user.email}"
     %h4
       = "Number of posts: #{ @user.articles.count }"
-  %table{class: "table-striped col-md-10"}
-    %tr
-      %th Title
-      %th Description
-      %th Rating
-      %th 
+  - if @user.articles.count != 0    
+    %table{class: "table-striped col-md-10"}
+      %tr
+        %th Title
+        %th Description
+        %th Rating
+        %th 
       - @articles.each do |article|        
         %tr
           %td
