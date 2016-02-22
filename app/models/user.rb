@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter, :linkedin]
   has_many :articles, dependent: :destroy 
+  has_many :identity, dependent: :destroy
 
   acts_as_voter
 
