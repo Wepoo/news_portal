@@ -8,7 +8,7 @@
     <h2><%= @article.title%></h2>
     <strong><%= @article.description %></strong>
     <p><%= @article.full_text %></p>
-    <h4 id="rating"><%= @article.votes_for.size %> users liked this</h4>
+    <h4 ><span id="rating"><%= @article.votes_for.size %></span> users liked this</h4>
 
     <%- if user_signed_in? && !(current_user.voted_for? @article) %>
       <%= link_to "Like", article_path, id: "like", remote: true, role: "button", class: "btn btn-default" %>
@@ -29,19 +29,8 @@
                 :class => 'btn btn-danger' %>
   <% end %>
 
-  <%= render partial: 'comments/tree', locals: { commentable: @article, comments_tree: @all_comments, comment: @comment } %>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="page-header">
-        <h1><small class="pull-right">
-          <%= @all_comments.size%>
-        </small> Comments </h1>
-      </div> 
-      <div class="comments-list">
-        <%- @all_comments.each do |comment| %>
-          <%= render partial: 'comments/haml/comment', locals: { comment: comment } %>
-        <% end %>
-      </div> 
-    </div> 
-  </div> 
+  <%= render partial: 'comments/new', locals: { commentable: @article, comments_tree: @all_comments, comment: @comment } %>
+       
+  <%= render partial: 'comments/tree', locals: { all_comments: @all_comments } %>
 </div>
+      

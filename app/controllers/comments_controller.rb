@@ -1,11 +1,13 @@
 class CommentsController < ApplicationController
-  # before_action :set_article, only: :create
+  before_action :set_article, only: :create
+
   def create
     @comment = Comment.create( comment_params )
 
     respond_to do |format|
-      if @comment.save!
-        format.html { redirect_to current_user, notice: 'Comment was successfully created.' }
+      format.js
+      if @comment.save
+        format.html { redirect_to @article, notice: 'Comment was successfully created.' }
       else
         format.html { redirect_to current_user }
         #format.json { render json: @article.errors, status: :unprocessable_entity }
@@ -18,7 +20,7 @@ class CommentsController < ApplicationController
   end
 
   def set_article
-  	@article = Article.find(params[:commentable_id])
+  	@article = Article.find(params[:comment][:commentable_id])
   end
 
 end

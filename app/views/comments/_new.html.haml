@@ -1,0 +1,9 @@
+.container
+  .row
+    .col-md-8
+      .page-header
+        - if commentable.try(:comments_on?) || true
+          %h3.comments_sum
+            Create comment
+      .comment-list
+        = render partial: 'comments/form', locals: { commentable: commentable, comment: comment }

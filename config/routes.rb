@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments#, only: :create
   end
+  get '/last_updated' => 'articles#last_updated', as: :last_updated
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

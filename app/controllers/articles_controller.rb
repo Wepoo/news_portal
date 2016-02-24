@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
   end
 
   def last_updated
-    @articles = Article.order(:updated_at)
+    @articles = Article.order(updated_at: :desc)
     render 'index'
   end 
 
@@ -23,6 +23,11 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.create(user_id: current_user.id)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /articles/1/edit
@@ -80,7 +85,4 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :full_text, :description, :user_id)
     end
 
-    def set_commentator
-      @user_who_commented = @current_user
-    end
 end

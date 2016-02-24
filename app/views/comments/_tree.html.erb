@@ -1,3 +1,15 @@
-<%= render partial: "comments/haml/tree",
-           locals: { commentable: commentable, comments_tree: comments_tree, comment: comment }
-%>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2 class="page-header">Comments</h2>
+      <section class="comment-list">
+      	<%- if all_comments.size == 0 %>
+        <h3> Вы можете стать первым, кто оставит комментарий!</h3>
+        <% end %>
+        <%- all_comments.each do |comment| %>
+          <%= render partial: 'comments/comment', locals: { comment: comment } %>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</div>	

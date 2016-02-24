@@ -1,0 +1,34 @@
+<article class="row">
+  <div class="col-md-2 col-sm-2 hidden-xs">
+    <figure class="thumbnail">
+      <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+      <figcaption class="text-center">
+        <%= current_user.name %>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="col-md-10 col-sm-10">
+    <div class="panel panel-default arrow left">
+      <div class="panel-body">
+        <header class="text-left">
+          <div class="comment-user"><i class="fa fa-user"></i> <%= current_user.name %></div>
+        </header>
+        <div class="comment-post">
+          <%= simple_form_for comment, url: article_comments_path(@article.id) do |f| %>
+            <div class="form-inputs">
+              <%= hidden_field_tag :tolerance_time, 0, id: nil, class: :tolerance_time %>
+              <%= f.hidden_field :commentable_type, value: commentable.class %>
+              <%= f.hidden_field :commentable_id,   value: commentable.id %>
+              <%= f.hidden_field :parent_id, class: :parent_id %>
+              <%= f.hidden_field :user_id,   class: :user_id %>
+              <%= f.text_area :body, :class => 'form-control', required: true %>
+            </div>
+        </div>
+        <p class="text-right">
+        <%= f.submit 'Comment', { class: "btn btn-primary btn-sm" } %>
+        </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</article>
