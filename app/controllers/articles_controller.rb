@@ -1,15 +1,23 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-
+  # before_action :set_commentator, only: :show
   # GET /articles
   # GET /articles.json
   def index
     @articles = Article.all
   end
 
+  def last_updated
+    @articles = Article.order(:updated_at)
+    render 'index'
+  end 
+
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @user_who_commented = current_user
+    @comment = Comment.build_from( @article, @user_who_commented.id, "" )
+    @all_comments = @article.comment_threads
   end
 
   # GET /articles/new
@@ -70,5 +78,9 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :full_text, :description, :user_id)
+    end
+
+    def set_commentator
+      @user_who_commented = @current_user
     end
 end
