@@ -13,6 +13,8 @@
       <div class="controls">
         <%= f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'Example: email@me.com' %>
         <p class="help-block">Please confirm your email address. No spam.</p>
+        <%= f.text_field :password, :value => '', class: 'form-control input-lg', hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+        <p class="help-block">Please enter new password</p>
       </div>
     </div>
     <div class="actions">

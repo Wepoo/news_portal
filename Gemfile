@@ -22,6 +22,8 @@ gem 'haml'
 
 gem 'acts_as_votable', '~> 0.10.0'
 
+gem 'acts_as_commentable_with_threading'
+
 # gem 'therubyracer', platforms: :ruby
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS

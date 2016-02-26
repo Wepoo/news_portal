@@ -1,0 +1,37 @@
+<article class="row" id="comment_container_<%= comment.id %>">
+  <div class="col-md-1 col-sm-1 hidden-xs">
+    <figure class="thumbnail">
+      <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+      <figcaption class="text-center">
+        <%= comment.user.name %>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="col-md-6 col-sm-6">
+    <div class="panel panel-default arrow left">
+      <div class="panel-body">
+        <header class="text-left">
+          <div class="comment-user"><i class="fa fa-user"></i> <%= comment.user.name %></div>
+          <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> 
+            <%= comment.updated_at.to_date %>
+          </time>
+        </header>
+        <div class="comment-post">
+          <p>
+            <%= comment.body %>
+          </p>
+        </div>
+        <p class="text-right">
+          <%= link_to new_article_comment_path(article_id: comment.commentable_id, comment_id: comment.id), id:"article_comments_link", remote: true do %>
+            <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</button>
+          <% end %>
+        </p>
+      </div>
+      <div id="reply_form_container_<%= comment.id %>"></div>
+
+    </div>
+  </div>
+</article>
+<%- comment.children.each do |child| %>
+  <%= render partial: 'comments/reply_comment', locals: { comment: child } %>
+<% end %>
