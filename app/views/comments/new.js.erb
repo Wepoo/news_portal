@@ -1,0 +1,2 @@
+$("#reply_form_container_<%= @reply_comment.id %>").html("<%=j render partial: 'comments/form', locals: { commentable: @reply_comment, comment: @comment } %>");
+$("#reply_form_container_<%= @reply_comment.id %>").show();

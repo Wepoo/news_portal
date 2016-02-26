@@ -1,3 +1,9 @@
-$('#article_comments_link').hide().after('<%= j render("form") %>');
-
-console.log("46");
+console.log("<%= @comment.commentable_type %>");
+console.log("<%= @comment.commentable_id %>");
+<%- if @comment.commentable_type == 'Article' %>
+$('#new_comment_container').prepend("<%= j render partial: 'comments/comment', locals: { comment: @comment } %>");
+$('#comment_body').val('');
+<%- else %>
+$('#reply_form_container_<%= @comment.commentable_id %>').hide();
+$('#comment_container_<%= @comment.commentable_id %>').after("<%= j render partial: 'comments/reply_comment', locals: { comment: @comment } %>");
+<% end %>

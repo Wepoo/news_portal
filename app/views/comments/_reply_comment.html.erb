@@ -1,4 +1,4 @@
-<article class="row" id="comment_container_<%= comment.id %>">
+<article class="row col-md-offset-1 col-sm-offset-1">
   <div class="col-md-1 col-sm-1 hidden-xs">
     <figure class="thumbnail">
       <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
@@ -9,6 +9,7 @@
   </div>
   <div class="col-md-6 col-sm-6">
     <div class="panel panel-default arrow left">
+      <div class="panel-heading right">Reply</div>
       <div class="panel-body">
         <header class="text-left">
           <div class="comment-user"><i class="fa fa-user"></i> <%= comment.user.name %></div>
@@ -24,14 +25,16 @@
         <p class="text-right">
           <%= link_to new_article_comment_path(article_id: comment.commentable_id, comment_id: comment.id), id:"article_comments_link", remote: true do %>
             <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</button>
-          <% end %>
-        </p>
-      </div>
-      <div id="reply_form_container_<%= comment.id %>"></div>
-
+          <% end %></p>
+      </div>    
+      <div id="reply_form_container_<%= comment.id %>"></div> 
     </div>
   </div>
 </article>
-<%- comment.children.each do |child| %>
-  <%= render partial: 'comments/reply_comment', locals: { comment: child } %>
-<% end %>
+<div class="row col-md-offset-1 col-offset-sm-1">
+  <div id="comment_container_<%= comment.id %>">
+  </div>
+  <%- comment.children.each do |child| %>
+    <%= render partial: 'comments/reply_comment', locals: { comment: child } %>
+  <% end %>
+</div>
