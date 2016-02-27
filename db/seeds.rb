@@ -5,3 +5,20 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.create(name: 'Admin', email: 'admin@qw', password: '12345678')
+
+5.times do |i|
+  Article.create(title: "Article ##{i}", description: "An article.", user_id: 1)
+end
+
+category_list = [ 'Sport', 'Economics', 'Politics', 'World',
+ 'Auto', 'Society', 'Accidents', 'Peoples']
+
+category_list.each do |category|
+  Category.create( title: category )
+end
+
+5.times do |i|
+  User.create(name: "User ##{i}", password: "user#{i}.", email: "User ##{i}")
+end

@@ -23,6 +23,13 @@
     <%=f.error_span(:title) %>
   </div>
   <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:description) %>
+  </div>
+  <div class="form-group">
     <%= f.label :full_text, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_area :full_text, :class => 'form-control' %>
@@ -30,18 +37,17 @@
     <%=f.error_span(:full_text) %>
   </div>
   <div class="form-group">
-    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <%= f.label :category, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :description, :class => 'form-control' %>
+      <%= f.collection_select(:category_id, Category.all, :id, :title) %>
     </div>
-    <%=f.error_span(:description) %>
+    <%=f.error_span(:category) %>
   </div>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                articles_path, :class => 'btn btn-default' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), articles_path, :class => 'btn btn-default' %>
     </div>
   </div>
 

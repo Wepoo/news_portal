@@ -4,13 +4,22 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.where(published: true)
   end
 
   def last_updated
-    @articles = Article.order(updated_at: :desc)
+    @articles = Article.where(published: true).order(updated_at: :desc)
     render 'index'
-  end 
+  end
+
+  def interesting
+    @articles = Article.where(published: true).order(rating: :desc)
+    render 'index'
+  end
+
+  def suggested
+    @articles = Article.where(published: false)
+  end
 
   # GET /articles/1
   # GET /articles/1.json
@@ -32,6 +41,13 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    @article.published = true
+    @article.save
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /articles
@@ -69,8 +85,9 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Article was successfully deleted.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
@@ -82,7 +99,7 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :full_text, :description, :user_id)
+      params.require(:article).permit(:title, :full_text, :description, :user_id, :category_id)
     end
 
 end

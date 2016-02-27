@@ -1,0 +1,7 @@
+%h3
+  Categories
+%ul.nav.nav-list
+  %li.nav-header
+  - @categories.each do |category|
+    %li
+      = link_to category.title, category
