@@ -4,16 +4,28 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.where(published: true)
+    if current_user
+      @articles = Article.where(published: true)
+    else
+      @articles = Article.where(published: true, hidden: false)
+    end
   end
 
   def last_updated
-    @articles = Article.where(published: true).order(updated_at: :desc)
+    if current_user
+      @articles = Article.where(published: true).order(updated_at: :desc)
+    else
+      @articles = Article.where(published: true, hidden: false).order(updated_at: :desc)
+    end
     render 'index'
   end
 
   def interesting
-    @articles = Article.where(published: true).order(rating: :desc)
+    if current_user
+      @articles = Article.where(published: true).order(rating: :desc)
+    else
+      @articles = Article.where(published: true, hidden: false).order(rating: :desc)
+    end
     render 'index'
   end
 
@@ -24,8 +36,10 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @user_who_commented = current_user
-    @comment = Comment.build_from( @article, @user_who_commented.id, "" )
+    if current_user
+      @user_who_commented = current_user
+      @comment = Comment.build_from( @article, @user_who_commented.id, "" )
+    end
     @all_comments = @article.comment_threads
   end
 
@@ -99,7 +113,7 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :full_text, :description, :user_id, :category_id)
+      params.require(:article).permit(:title, :full_text, :description, :user_id, :category_id, :hidden, :access_to_description)
     end
 
 end

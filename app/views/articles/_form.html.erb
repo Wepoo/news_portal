@@ -43,6 +43,23 @@
     </div>
     <%=f.error_span(:category) %>
   </div>
+  <div class="form-group">
+    <%= f.label 'Access mask', :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :hidden %>
+      <%= f.label(:hide, "Hide from unregisted users") %>
+    </div>
+    <%=f.error_span(:hidden) %>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.radio_button(:access_to_description, false) %>
+      <%= f.label(:only_title, "Show only title") %>
+      <%= f.radio_button(:access_to_description, true) %>
+      <%= f.label(:title_and_descr, "Show title and description") %>
+    </div>
+    <%=f.error_span(:access_to_description) %>
+  </div>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

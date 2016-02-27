@@ -1,0 +1,7 @@
+- articles.each do |article|
+  .article.panel
+    %h3
+      = link_to article.title, article
+    - if article.access_to_description == true  
+      %p
+        = article.description

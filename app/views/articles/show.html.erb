@@ -5,16 +5,25 @@
   </div>
 
   <div class="row">
-    <h2><%= @article.title%></h2>
-    <strong><%= @article.description %></strong>
-    <p><%= @article.full_text %></p>
-    <h4 ><span id="rating"><%= @article.votes_for.size %></span> users liked this</h4>
+    <div class="panel">
+      <h2><%= @article.title%></h2>    
+      <strong><%= @article.description %></strong>
+      <%- if @article.access_to_description == true %>
+        <p><%= @article.full_text %></p>
+      <%- else %>
+        <h4>
+          <%= link_to 'Sign in', new_user_session_path%>
+           in for more info.
+        </h4>
+      <% end %>
+      <h4 ><span id="rating"><%= @article.votes_for.size %></span> users liked this</h4>
 
-    <%- if user_signed_in? && !(current_user.voted_for? @article) %>
-      <%= link_to "Like", article_path, id: "like", remote: true, role: "button", class: "btn btn-default" %>
-    <% end %>
-    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
-    <h4>Posted by <%= link_to @article.user.name, @article.user %> at <%= @article.created_at %></h4>
+      <%- if user_signed_in? && !(current_user.voted_for? @article) %>
+        <%= link_to "Like", article_path, id: "like", remote: true, role: "button", class: "btn btn-default" %>
+      <% end %>
+      <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+      <h4>Posted by <%= link_to @article.user.name, @article.user %> at <%= @article.created_at %></h4>
+    </div>
   </div>
 
   <%- if user_signed_in? && @article.user_id == current_user.id %>
@@ -28,9 +37,9 @@
                 :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                 :class => 'btn btn-danger' %>
   <% end %>
-
-  <%= render partial: 'comments/new', locals: { commentable: @article, comments_tree: @all_comments, comment: @comment } %>
-       
+  <%- if current_user %>
+    <%= render partial: 'comments/new', locals: { commentable: @article, comments_tree: @all_comments, comment: @comment } %>
+  <% end %>    
   <%= render partial: 'comments/tree', locals: { all_comments: @all_comments } %>
 </div>
       

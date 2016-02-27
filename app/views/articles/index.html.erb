@@ -5,16 +5,5 @@
 <%- if @articles.size == 0 %>
   <h4>News portal is empty now</h4>
 <%- else %>  
-  <table class="table table-striped">
-    <tbody>
-      <% @articles.each do |article| %>
-        <tr>
-          <h2><%= link_to article.title, article %></h2>
-          <p><%= article.description %></p>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render partial: 'articles/articles', locals: { articles: @articles} %>
 <% end %>
-
-<%= link_to "Like", new_article_path, id: "new_article_link", remote: true, role: "button", class: "btn btn-default" %>

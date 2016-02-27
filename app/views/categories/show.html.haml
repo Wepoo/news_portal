@@ -6,9 +6,4 @@
     %h2
       .page-header
         = @category.title
-    - @articles.each do |article|
-      .article.panel
-        %h3
-          = link_to article.title, article
-        %p
-          = article.description
+    = render partial: 'articles/articles', locals: { articles: @articles}  

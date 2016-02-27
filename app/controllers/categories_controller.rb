@@ -11,7 +11,11 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @articles = Article.where(category_id: params[:id])
+    if current_user
+      @articles = Article.where(category_id: params[:id], published: true)
+    else
+      @articles = Article.where(category_id: params[:id], published: true, hidden: false)
+    end
   end
 
   # GET /categories/new
