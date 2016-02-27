@@ -26,7 +26,16 @@ class CommentsController < ApplicationController
   end
 
   def set_parent
-    c = Comment.last
-    c.update parent_id: :commentable_id
+    @connection = ActiveRecord::Base.establish_connection(
+            :adapter => "postgresql",
+            :host => "localhost",
+            :database => "news_portal_development",
+            :username => "misha",
+            :password => "123"
+    )
+    sql = "UPDATE comments
+          SET parent_id = commentable_id
+          WHERE id=(SELECT MAX(id) FROM comments) AND commentable_type = 'Comment'"
+    @result = @connection.connection.execute(sql);
   end
 end

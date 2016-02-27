@@ -55,6 +55,9 @@
             <li><%= link_to 'Login', new_user_session_path %></li>
             <li><%= link_to 'Signup', new_user_registration_path %></li>
           <% end %>
+          <% if user_signed_in? && current_user.role == 'admin' %>
+            <li><%= link_to 'Suggested news', suggested_path %></li>
+          <% end %>
           </ul>
         </div>
       </div>
@@ -71,12 +74,15 @@
             <h3>News</h3>
             <ul class="nav nav-list">
               <li class="nav-header">Now</li>
-              <li><%= link_to "Interesting", "/path1"  %></li>
+              <li><%= link_to "Interesting", "/interesting"  %></li>
               <li><%= link_to "Popular", "/path2"  %></li>
               <li><%= link_to "The most discussing", "/path3"  %></li>
               <li><%= link_to "New", last_updated_path   %></li>
             </ul>
           </div><!--/.well -->
+          <div class="well sidebar-nav">
+            <%= render 'categories/categories' %>
+          </div>
         </div><!--/span-->
       </div><!--/row-->
 

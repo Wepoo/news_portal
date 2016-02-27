@@ -1,0 +1,14 @@
+.container
+  .row.col-md-8
+    %p#notice
+      = notice
+ 
+    %h2
+      .page-header
+        = @category.title
+    - @articles.each do |article|
+      .article.panel
+        %h3
+          = link_to article.title, article
+        %p
+          = article.description
