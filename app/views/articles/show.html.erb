@@ -8,7 +8,7 @@
     <div class="panel">
       <h2><%= @article.title%></h2>    
       <strong><%= @article.description %></strong>
-      <%- if @article.access_to_description == true %>
+      <%- if current_user || @article.access_to_description == true %>
         <p><%= @article.full_text %></p>
       <%- else %>
         <h4>
@@ -22,6 +22,9 @@
         <%= link_to "Like", article_path, id: "like", remote: true, role: "button", class: "btn btn-default" %>
       <% end %>
       <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+      <h4>
+        <%= @visits %>
+      </h4>
       <h4>Posted by <%= link_to @article.user.name, @article.user %> at <%= @article.created_at %></h4>
     </div>
   </div>
