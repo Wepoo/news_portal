@@ -41,6 +41,8 @@ class ArticlesController < ApplicationController
       @comment = Comment.build_from( @article, @user_who_commented.id, "" )
     end
     @all_comments = @article.comment_threads
+
+    @visits = Ahoy::Event.where("properties->>'id' = '#{params[:id]}' AND name = 'Processed articles#show'").count
   end
 
   # GET /articles/new
