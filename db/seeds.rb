@@ -22,3 +22,10 @@ end
 5.times do |i|
   User.create(name: "User ##{i}", password: "user#{i}.", email: "User ##{i}")
 end
+
+tag_list = [ 'Lena', 'cat', 'pizza', 'home', '2016', 'corn',
+'ruby', 'asd', 'tag1', 'lol', 'Putin', 'football', 'master' ]
+
+tag_list.each do |tag|
+  ActsAsTaggableOn::Tag.create( name: tag )
+end

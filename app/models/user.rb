@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :identity, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  acts_as_ordered_taggable
+  acts_as_ordered_taggable_on :skills, :interests
+  
   acts_as_voter
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update

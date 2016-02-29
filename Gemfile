@@ -37,6 +37,8 @@ gem 'omniauth-linkedin'
 
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 # Use jquery as the JavaScript library
+gem 'jquery-ui-rails'
+
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -46,6 +48,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'ahoy_matey'
+
+gem 'acts-as-taggable-on', '~> 3.4'
+
+gem 'rails-jquery-autocomplete'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -1,13 +1,21 @@
 class ArticlesController < ApplicationController
+
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
+
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   # before_action :set_commentator, only: :show
   # GET /articles
   # GET /articles.json
   def index
-    if current_user
-      @articles = Article.where(published: true)
+    if params[:tag]
+      @articles = Article.tagged_with(params[:tag])
     else
-      @articles = Article.where(published: true, hidden: false)
+      @articles = Article.tagged_with(params[:tag])
+      if current_user
+        @articles = Article.where(published: true)
+      else
+        @articles = Article.where(published: true, hidden: false)
+      end
     end
   end
 
@@ -115,7 +123,7 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :full_text, :description, :user_id, :category_id, :hidden, :access_to_description)
+      params.require(:article).permit(:title, :full_text, :description, :user_id, :category_id, :hidden, :access_to_description, :content, :name, :tag_list)
     end
 
 end

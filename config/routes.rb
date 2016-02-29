@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   resources :users
   resources :articles do
     resources :comments#, only: :create
+    get :autocomplete_tag_name, :on => :collection
   end
   resources :categories
 
+  get 'tags/:tag', to: 'articles#index', as: :tag
+  
   get '/last_updated' => 'articles#last_updated', as: :last_updated
   get '/interesting' => 'articles#interesting', as: :interesting
   get '/suggested' => 'articles#suggested', as: :suggested
