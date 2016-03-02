@@ -52,6 +52,12 @@ gem 'ahoy_matey'
 gem 'acts-as-taggable-on', '~> 3.4'
 
 gem 'rails-jquery-autocomplete'
+gem 'rails3-jquery-autocomplete'
+
+gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+
+gem "wysiwyg-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

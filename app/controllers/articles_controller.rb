@@ -55,7 +55,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
-    @article = Article.create(user_id: current_user.id)
+    @article = Article.new()
 
     respond_to do |format|
       format.html

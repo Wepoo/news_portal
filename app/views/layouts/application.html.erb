@@ -7,6 +7,9 @@
     <title><%= content_for?(:title) ? yield(:title) : "NewsPortal" %></title>
     <%= csrf_meta_tags %>
 
+    <%= stylesheet_link_tag "application", "base/jquery-ui-1.10.4.custom" %>  
+    <%= javascript_include_tag "application", "jquery-ui-1.10.4.custom.min", "autocomplete-rails" %>
+
     <%= stylesheet_link_tag "application", :media => "all" %>
 
     <!-- For third-generation iPad with high-resolution Retina display: -->

@@ -1,4 +1,7 @@
+require 'elasticsearch/model'
+
 class Article < ActiveRecord::Base
+
   belongs_to :user
   belongs_to :category
   has_many :comments
@@ -8,5 +11,6 @@ class Article < ActiveRecord::Base
   
   acts_as_votable
  
-  acts_as_taggable
+  acts_as_taggable_on :tags
 end
+
