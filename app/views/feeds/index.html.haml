@@ -1,0 +1,19 @@
+.container
+  .row.col-md-8
+    .page-header
+      %h1
+        = @feed.title
+    - @entries.each do |entry|
+      .panel
+        .panel-body
+          %h3
+            = entry.title
+          -
+          %i
+            published
+            = time_ago_in_words(entry.published)
+            ago.
+          %div{id:entry.id, class: "hidden_article"}
+            = render partial: 'feeds/entry', locals: { entry: entry }
+          %button.btn.btn-default.btn-sm{onclick:"$('.hidden_article').show();"}
+            More..
