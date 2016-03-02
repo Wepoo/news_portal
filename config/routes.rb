@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'articles#index'
   devise_for :users, controllers: { registrations: "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
   
@@ -8,6 +9,11 @@ Rails.application.routes.draw do
     get :autocomplete_tag_name, :on => :collection
   end
   resources :categories
+  
+  get 'feeds/index'
+
+  get 'feeds/show'
+
 
   get 'tags/:tag', to: 'articles#index', as: :tag
   

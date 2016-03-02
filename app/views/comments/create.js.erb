@@ -1,5 +1,3 @@
-console.log("<%= @comment.commentable_type %>");
-console.log("<%= @comment.commentable_id %>");
 <%- if @comment.commentable_type == 'Article' %>
 $('#new_comment_container').prepend("<%= j render partial: 'comments/comment', locals: { comment: @comment } %>");
 $('#comment_body').val('');

@@ -1,5 +1,3 @@
-require 'elasticsearch/model'
-
 class Article < ActiveRecord::Base
 
   belongs_to :user
