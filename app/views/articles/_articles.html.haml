@@ -1,7 +1,22 @@
 - articles.each do |article|
   .article.panel
-    %h3
-      = link_to article.title, article
-    - if current_user || article.access_to_description == true  
-      %p
-        = article.description
+    .panel-heading
+      .row
+        %h3.pull-left
+          = link_to article.title, article
+        %h3.pull-right
+          %small
+            %em
+              = time_ago_in_words(article.updated_at)
+              ago
+    
+    .panel-body
+      - if current_user || article.access_to_description == true  
+        %p
+          = article.description
+    .panel-footer
+      - article.tag_list.each do |tag|
+        %label.label-default
+          = link_to tag_path(tag) do
+            %button{type:"button", class:"btn btn-default btn-xs"}
+              = tag
