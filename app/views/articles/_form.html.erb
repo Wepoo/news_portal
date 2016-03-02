@@ -32,7 +32,7 @@
     <div class="form-group">
     <%= f.label :full_text, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :full_text, :class => 'form-control' %>
+      <%= f.text_area :full_text, :class => 'form-control' %>
     </div>
     <%=f.error_span(:full_text) %>
   </div>
@@ -51,7 +51,7 @@
     </div>
     <%=f.error_span(:hidden) %>
   </div>
-  <div class="form-group">
+  <div class="form-group" id="article_access" >
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.radio_button(:access_to_description, false) %>
       <%= f.label(:only_title, "Show only title") %>

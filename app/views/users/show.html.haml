@@ -7,25 +7,26 @@
       = "Email: #{@user.email if @user.email}"
     %h4
       = "Number of posts: #{ @user.articles.count }"
-  - if @user.articles.count != 0    
-    %table{class: "table-striped col-md-10"}
-      %tr
-        %th Title
-        %th Description
-        %th Rating
-        %th 
-      - @articles.each do |article|        
+  .row{class: "col-md-8"}
+    - if @user.articles.count != 0    
+      %table{class: "table-striped col-md-10"}
         %tr
-          %td
-            = article.title
-          %td
-            = article.description
-          %td
-            = article.rating
-          %td
-            = link_to article do
-              %button{class: "btn btn-default", type:"submit"}
-                More..
+          %th Title
+          %th Description
+          %th Rating
+          %th 
+        - @articles.each do |article|        
+          %tr
+            %td
+              = article.title
+            %td
+              = truncate(article.description, :length => 25, :omission => '... (continued)')
+            %td
+              = article.rating
+            %td
+              = link_to article do
+                %button{class: "btn btn-default", type:"submit"}
+                  More..
 
   .row{class: "col-md-8"}
     - if user_signed_in? && @user.id == current_user.id

@@ -5,7 +5,7 @@
   </div>
 
   <div class="row">
-    <div class="panel">
+    <div class="panel col-lg-9">
       <h2><%= @article.title%></h2>    
       <strong><%= @article.description %></strong>
       <%- if current_user || @article.access_to_description == true %>
@@ -24,6 +24,7 @@
       <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
       <h4>
         <%= @visits %>
+        visitors
       </h4>
       <h4>Posted by <%= link_to @article.user.name, @article.user %> at <%= @article.created_at %></h4>
     </div>
