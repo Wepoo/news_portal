@@ -12,27 +12,27 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.tagged_with(params[:tag])
       if current_user
-        @articles = Article.where(published: true)
+        @articles = Article.published
       else
-        @articles = Article.where(published: true, hidden: false)
+        @articles = Article.published.hidden
       end
     end
   end
 
   def last_updated
     if current_user
-      @articles = Article.where(published: true).order(updated_at: :desc)
+      @articles = Article.published.order(updated_at: :desc)
     else
-      @articles = Article.where(published: true, hidden: false).order(updated_at: :desc)
+      @articles = Article.published.hidden.order(updated_at: :desc)
     end
     render 'index'
   end
 
   def interesting
     if current_user
-      @articles = Article.where(published: true).order(rating: :desc)
+      @articles = Article.published.order(rating: :desc)
     else
-      @articles = Article.where(published: true, hidden: false).order(rating: :desc)
+      @articles = Article.published.hidden.order(rating: :desc)
     end
     render 'index'
   end

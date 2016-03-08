@@ -10,5 +10,10 @@ class Article < ActiveRecord::Base
   acts_as_votable
  
   acts_as_taggable_on :tags
+
+  scope :published, -> { where(published: true) }
+
+  scope :hidden, -> { where(hidden: false) }
+
 end
 
