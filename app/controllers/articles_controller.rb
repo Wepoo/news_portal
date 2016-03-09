@@ -45,8 +45,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     if current_user
-      @user_who_commented = current_user
-      @comment = Comment.build_from( @article, @user_who_commented.id, "" )
+      @comment = Comment.build_from( @article, @current_user.id, "" )
     end
     @all_comments = @article.comment_threads
 

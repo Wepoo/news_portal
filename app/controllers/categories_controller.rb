@@ -12,9 +12,9 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     if current_user
-      @articles = Article.where(category_id: params[:id], published: true)
+      @articles = Article.where(category_id: params[:id]).published
     else
-      @articles = Article.where(category_id: params[:id], published: true, hidden: false)
+      @articles = Article.where(category_id: params[:id]).published.where(hidden: false)
     end
   end
 

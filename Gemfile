@@ -14,6 +14,10 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
 gem 'devise'
 
 gem 'simple_form'
