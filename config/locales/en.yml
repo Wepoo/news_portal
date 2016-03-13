@@ -20,4 +20,24 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  title: "asd"
   hello: "Hello world"
+  articles:
+    index:
+      title: "Articles"
+    suggested: "Suggested news"
+  categories: "Categories"
+  devise:
+    log_out: "Log out"
+    sign_in: "Sign in"
+    sign_up: "Sign up"
+  rss: "News from %{source}"
+  tag:
+    cloud: "Tag cloud"
+  datetime:
+    ago: "ago"
+  user:
+    user: "User"
+    name: "Name"
+    email: "Email"
+    num_of_posts: "Number of posts"

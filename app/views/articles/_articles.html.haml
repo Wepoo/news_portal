@@ -8,7 +8,7 @@
           %small
             %em
               = time_ago_in_words(article.updated_at)
-              ago
+              = t "datetime.ago"
     
     .panel-body
       - if current_user || article.access_to_description == true  

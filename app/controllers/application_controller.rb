@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  before_filter :set_categories
+  before_filter :set_categories, :set_user_language
   after_filter :track_action
   
   protect_from_forgery with: :exception
@@ -23,6 +23,14 @@ class ApplicationController < ActionController::Base
 
   def track_action
     ahoy.track "Processed #{controller_name}##{action_name}", request.filtered_parameters
+  end
+
+  def set_user_language
+    if user_signed_in?
+      I18n.locale = current_user.locale
+    else 
+      I18n.locale = I18n.default_locale
+    end
   end
 
 end
