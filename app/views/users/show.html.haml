@@ -1,12 +1,13 @@
 .container
   .row{class: "col-md-8"}
-    %h3 User 
+    %h3 
+      = t "user.user" 
     %p
-      = "Name: #{@user.name if @user.name}"
+      = "#{t 'user.name'}: #{@user.name if @user.name}"
     %p
-      = "Email: #{@user.email if @user.email}"
+      = "#{t 'user.email'}: #{@user.email if @user.email}"
     %h4
-      = "Number of posts: #{ @user.articles.count }"
+      = "#{t 'user.num_of_posts'}: #{ @user.articles.count }"
   .row{class: "col-md-8"}
     - if @user.articles.count != 0    
       %table{class: "table-striped col-md-10"}

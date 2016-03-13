@@ -53,14 +53,32 @@
           <ul class="nav navbar-nav">
           <% if user_signed_in? %>
             <li><%= link_to current_user.name, current_user %></li>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete  do %>
+              <%= t 'devise.log_out' %>
+              <% end %>
           <% else %>
-            <li><%= link_to 'Sign in', new_user_session_path %></li>
-            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+            <li>
+              <%= link_to new_user_session_path do %>
+              <%= t 'devise.sign_in' %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_registration_path do %>
+              <%= t 'devise.sign_up' %>
+              <% end %>
+            </li>
           <% end %>
           <% if user_signed_in? && current_user.role == 'admin' %>
-            <li><%= link_to 'Suggested news', suggested_path %></li>
-            <li><%= link_to 'Categories', categories_path %></li>
+            <li>
+              <%= link_to suggested_path do %>
+              <%= t 'articles.suggested' %>
+              <% end %>
+            <li>
+              <%= link_to categories_path do %>
+              <%= t 'categories' %>
+              <% end %>
+            </li>
           <% end %>
           </ul>
         </div>
@@ -78,16 +96,22 @@
             <h3>News</h3>
             <ul class="nav nav-list">
               <li class="nav-header">Now</li>
-              <li><%= link_to "Interesting", "/interesting"  %></li>
+              <li><%= link_to "Interesting", interesting_path  %></li>
               <li><%= link_to "New", last_updated_path %></li>
             </ul>
           </div><!--/.well -->
           <div class="well sidebar-nav">
-            <h3><%= link_to "News from Feedjira", feeds_index_path %></h3>
+            <h3>
+              <%= link_to feeds_index_path do %>
+                <%= t 'rss', source: "Feedjira" %>
+              <% end %>
+            </h3>
           </div>
           <div class="well sidebar-nav">
             <div id="tag_cloud">
-              <h2>Tag cloud</h2>
+              <h2>
+                <%= t 'tag.cloud' %>
+              </h2>
               <% tag_cloud Article.tag_counts, %w[s m l] do |tag, css_class| %>
                 <%= link_to tag.name, tag_path(tag.name), class: css_class %>
               <% end %>
