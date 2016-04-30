@@ -11,7 +11,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-
+gem "react_on_rails", "~> 5"
 # gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 group :development, :test do

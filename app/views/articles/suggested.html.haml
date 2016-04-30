@@ -7,7 +7,7 @@
           %th Title
           %th Description
           %th 
-        - @articles.each do |article|        
+        - @articles.each do |article|
           %tr{id: "article_#{article.id}"}
             %td
               = article.title
@@ -24,4 +24,4 @@
             %td
               = link_to article_path(id: article.id), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, remote: true do
                 %button{class: "btn btn-danger"}
-                  Delete      
+                  Delete
