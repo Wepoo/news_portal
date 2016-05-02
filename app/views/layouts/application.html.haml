@@ -1,0 +1,52 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title
+      News Portal
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %link{href: 'https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900', rel: 'stylesheet', type: 'text/css'}
+    = csrf_meta_tags
+  %body
+    %script{type: 'text/javascript',}
+    .navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{type: "button", 'data-toggle'=>'collapse','data-target'=>'.navbar-inverse-collapse'}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to 'News Portal', root_path, class: 'navbar-brand'
+          
+        .navbar-collapse.collapse.navbar-responsive-collapse
+          %ul.nav.navbar-nav
+            = render partial: 'layouts/menu'
+          %ul.nav.navbar-nav.navbar-right.top-nav
+            - if user_signed_in?
+              %li.dropdown
+                %a.dropdown-toggle.dropdown-toggle-with-avatar{href:"bootstrap-elements.html", 'data-target'=>"#", 'data-toggle'=>"dropdown"}
+                  = current_user.credentials
+                  = image_tag current_user.try(:avatar).try(:url), class: 'img-circle navbar-avatar'
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    = link_to edit_user_registration_path do
+                      %span.glyphicon.glyphicon-user
+                      Edit Profile
+                  %li
+                    = link_to destroy_user_session_path, method: :delete  do
+                      %span.glyphicon.glyphicon-log-out
+                      = t 'devise.log_out'
+            - else
+              %li
+                = link_to new_user_session_path do
+                  %span.glyphicon.glyphicon-log-in
+                  = t 'devise.sign_in'
+              %li
+                = link_to new_user_registration_path do
+                  %span.glyphicon.glyphicon-user
+                  = t 'devise.sign_up'
+    .container
+      .row
+        .col-lg-12
+          = yield  

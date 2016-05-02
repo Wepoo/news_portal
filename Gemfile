@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 ruby "2.3.0"
 
 gem 'rails', '4.2.5.1'
-gem 'pg', '~> 0.15'
 gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'pg', '~> 0.15'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem "react_on_rails", "~> 5"
@@ -18,8 +19,8 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'acts_as_commentable_with_threading'
 
 gem "therubyracer"
-gem "less-rails" 
-gem "twitter-bootstrap-rails"
+gem 'bootstrap-material-design'
+gem 'bootstrap_tokenfield_rails'
 
 gem 'omniauth-facebook'
 gem 'omniauth-twitter', :github => 'arunagw/omniauth-twitter'
@@ -39,9 +40,11 @@ gem 'acts-as-taggable-on', '~> 3.4'
 
 gem 'rails-jquery-autocomplete'
 gem 'rails3-jquery-autocomplete'
+gem 'compass-rails'
+gem 'chosen-rails'
 
 gem 'feedjira'
-
+gem 'puma'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

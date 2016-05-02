@@ -21,4 +21,13 @@
 //
 //= require autocomplete-rails
 //= require ahoy
-//= require twitter/bootstrap
+//= require chosen-jquery
+//= require bootstrap
+//= require bootstrap-material-design
+
+$(document).ready(function(){
+    $.material.init();
+});
+$(document).on('page:load', function(){
+    $.material.init();
+});

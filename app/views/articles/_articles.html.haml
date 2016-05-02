@@ -1,22 +1,20 @@
 - articles.each do |article|
-  .article.panel
-    .panel-heading
-      .row
-        %h3.pull-left
-          = link_to article.title, article
-        %h3.pull-right
-          %small
-            %em
-              = time_ago_in_words(article.updated_at)
-              = t "datetime.ago"
-    
-    .panel-body
-      - if current_user || article.access_to_description == true  
-        %p
-          = article.description
-    .panel-footer
-      - article.tag_list.each do |tag|
-        %label.label-default
-          = link_to tag_path(tag) do
-            %button{type:"button", class:"btn btn-default btn-xs"}
-              = tag
+  .col-sm-8.col-md-8.col-lg-8
+    %div
+      .panel
+        .panel-body.article-tile
+          %h3
+            = truncate(article.title, length: 15)
+            - if article.rating > 0
+              %span.pull-right{style: 'color: green'}
+                %i.glyphicon.glyphicon-ok
+          %h5
+            = truncate(article.description, length: 45)
+          %i.school_name
+            - article.tag_list.each do |tag|
+              = link_to tag_path(tag) do
+                %button{type:"button", class:"btn btn-default btn-xs"}
+                  = tag
+          %div
+            = time_ago_in_words(article.created_at) + ' ago'
+            = link_to 'More...', article

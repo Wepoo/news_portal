@@ -1,9 +1,0 @@
-<%- model_class = Article -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<%- if @articles.size == 0 %>
-  <h4>News portal is empty now</h4>
-<%- else %>  
-  <%= render partial: 'articles/articles', locals: { articles: @articles} %>
-<% end %>

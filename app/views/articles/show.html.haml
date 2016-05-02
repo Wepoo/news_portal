@@ -1,0 +1,46 @@
+.container
+  .row
+    .jumbotron
+      .col-sm-4
+        %a{:href => "#"}
+          %img.img-responsive{:src => "http://placehold.it/1280X720"}/
+      .col-sm-8
+        %h3.title= @article.title
+        %p.text-muted
+          %span.glyphicon.glyphicon-calendar
+          = @article.created_at
+          %span.glyphicon.glyphicon-eye-open
+          #{@visits} visits
+        %p= @article.description
+        %p.text-muted
+          Presented by #{link_to @article.user.name, @article.user}
+      - if current_user || @article.access_to_description == true
+        %p= @article.full_text
+      - else
+        %h4
+          = link_to 'Sign in', new_user_session_path
+          in for more info.
+      %h4
+        %span.glyphicon.glyphicon-heart
+        %span#rating= @article.votes_for.size
+      - if user_signed_in? && !(current_user.voted_for? @article)
+        = link_to article_path, id: "like", remote: true, role: "button", class: "btn btn-default" do
+          %span.glyphicon.glyphicon-heart-empty
+          Like
+      .fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
+
+  - if user_signed_in? && @article.user_id == current_user.id
+    = link_to t('.back', :default => t("helpers.links.back")), |
+      articles_path, :class => 'btn btn-default'               |
+    -#
+    = link_to t('.edit', :default => t("helpers.links.edit")), |
+      edit_article_path(@article), :class => 'btn btn-default' |
+    -#
+    = link_to t('.destroy', :default => t("helpers.links.destroy")),                                               |
+      article_path(@article),                                                                                      |
+      :method => 'delete',                                                                                         |
+      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, |
+      :class => 'btn btn-danger'                                                                                   |
+  - if current_user
+    = render partial: 'comments/new', locals: { commentable: @article, comments_tree: @all_comments, comment: @comment }
+  = render partial: 'comments/tree', locals: { all_comments: @all_comments }
