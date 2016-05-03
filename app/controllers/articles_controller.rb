@@ -10,13 +10,13 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     if params[:tag]
-      @articles = Article.tagged_with(params[:tag])
+      @articles = Article.tagged_with(params[:tag]).order(sort_column + ' ' + sort_direction)
     else
-      @articles = Article.tagged_with(params[:tag])
+      @articles = Article.tagged_with(params[:tag]).order(sort_column + ' ' + sort_direction)
       if current_user
         @articles = Article.published.order(sort_column + ' ' + sort_direction)
       else
-        @articles = Article.published.hidden
+        @articles = Article.published.hidden.order(sort_column + ' ' + sort_direction)
       end
     end
   end

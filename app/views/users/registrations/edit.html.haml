@@ -1,0 +1,57 @@
+.container.well{style: "padding-top: 0px;"}
+  %h1.page-header{style: 'margin-top: 10px;'}
+    Редактирование профиля
+  .row
+    - if resource.nil?
+      - resource.build_profile
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class:'form-horizontal', method: :put, :multipart => true}) do |f|
+      /! left column
+      .col-md-4.col-sm-6.col-xs-12
+        = image_tag(current_user.avatar.url, class: 'avatar img-circle img-thumbnail', alt: 'avatar', id: 'preview')
+        %h6
+          = t('.upload_a_different_photo') + '...'
+          .jumbotron
+            = f.file_field(:avatar, class: 'filestyle', "data-buttonName" => "btn-primary")
+            = f.hidden_field :avatar_cache
+      .col-md-8.col-sm-6.col-xs-12.personal-info
+        - unless devise_error_messages! == ''
+          .alert.alert-info.alert-dismissable
+            %a.panel-close.close{'data-dismiss'=>'alert'}  ×
+            %i.fa.fa-coffee
+              = devise_error_messages!
+        %h3
+          = t('.personal_info')
+        .form-group
+          %label.col-md-3.control-label{for: 'inputName'}
+            = t('.name')+':'
+          .col-md-8
+            = f.text_field :name, autocomplete: 'on', class: 'form-control', id: 'inputName'
+        .form-group
+          %label.col-md-3.control-label{for: 'inputLastName'}
+            = t('.last_name')+':'
+          .col-md-8
+            = f.text_field :last_name, autocomplete: 'on', class: 'form-control', id: 'inputLastName'
+        .form-group
+          %label.col-md-3.control-label{for: 'inputBirthday'}
+            = t('.birthday')+':'
+          .col-md-8
+            = f.date_field :birthday, class: 'form-control', id: 'inputBirthday'
+        .form-group
+          %label.col-md-3.control-label{for: 'inputPhone'}
+            = t('.phone')
+          .col-md-8
+            = f.text_field :phone, autocomplete: 'on', class: 'form-control', id: 'inputPhone'
+        .form-group
+          %label.col-md-3.control-label{for: 'inputPassword'}
+            = t('.password')+':'
+          .col-md-8
+            = f.password_field :password, autocomplete: 'off', class: 'form-control', id: 'inputPassword'
+        .form-group
+          %label.col-md-3.control-label{for: 'inputPasswordConfirmation'}
+            = t('.password_confirmation')+':'
+          .col-md-8
+            = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', id: 'inputPasswordConfirmation'
+        .form-group
+          %label.col-md-3.control-label
+          .col-md-8
+            = f.submit 'Save changes' , :class=>'btn btn-primary'

@@ -22,6 +22,7 @@
 //= require autocomplete-rails
 //= require ahoy
 //= require chosen-jquery
+//= require bootstrap-filestyle
 //= require bootstrap
 //= require bootstrap-material-design
 
@@ -31,3 +32,7 @@ $(document).ready(function(){
 $(document).on('page:load', function(){
     $.material.init();
 });
+
+$(":file").filestyle({
+  input: false
+})

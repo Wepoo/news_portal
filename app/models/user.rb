@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  mount_uploader :avatar, AvatarUploader
+
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 
@@ -13,10 +15,11 @@ class User < ActiveRecord::Base
 
   acts_as_ordered_taggable
   acts_as_ordered_taggable_on :skills, :interests
-  
   acts_as_voter
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  validates_integrity_of  :avatar
+  validates_processing_of :avatar
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
     identity = Identity.find_for_oauth(auth)

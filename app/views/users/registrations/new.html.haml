@@ -1,0 +1,30 @@
+.col-md-offset-3.col-md-6
+  .well.bs-component
+    = form_for(resource, :html => {:class => 'form-horizontal'}, as: resource_name, url: registration_path(resource_name)) do |f|
+      %fieldset
+        %legend
+          Login
+        .form-group
+          %label{for: 'inputEmail', class: 'col-md-2 control-label'}
+            Email
+          .col-md-10
+            = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email', id: 'inputEmail'
+        .form-group
+          %label{for: "inputPassword", class: "col-md-2 control-label"}
+            Password
+          .col-md-10
+            = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password', id: 'inputPassword'
+        .form-group
+          %label{for: "inputPasswordConfirmation", class: "col-md-2 control-label"}
+            Password confirmation
+          .col-md-10
+            = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Password confirmation', id: 'inputPasswordConfirmation'
+        .form-group
+          .col-md-10.col-md-offset-2
+            = f.submit 'Sign up', class: 'btn btn-primary'
+        .form-group
+          .col-md-offset-2.col-md-10
+            Already registered?
+            = link_to('Sign in', new_user_session_path)
+        = render "devise/shared/links"
+

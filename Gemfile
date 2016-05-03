@@ -42,9 +42,16 @@ gem 'rails-jquery-autocomplete'
 gem 'rails3-jquery-autocomplete'
 gem 'compass-rails'
 gem 'chosen-rails'
+gem 'carrierwave'
 
 gem 'feedjira'
 gem 'puma'
+
+gem 'bootstrap-filestyle-rails'
+gem 'email_validator'
+gem 'twitter-typeahead-rails'
+gem 'awesome_print'
+gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
