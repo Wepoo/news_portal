@@ -10,20 +10,8 @@
     %li.divider
     %li
       = link_to "Новости из Feedjira", feeds_index_path
-    %li
-      %a{href: "javascript:void(0)"}
-        Еще отчетов
-%li.dropdown
-  %a.dropdown-toggle{href: "bootstrap-elements.html", 'data-target'=>"#", 'data-toggle'=>"dropdown"}
-    Сотрудники
-    %b.caret
-  %ul.dropdown-menu
-    %li
-      = link_to "Создание компании", root_path
-    %li
-      = link_to "Добавить сотрудника", root_path
 
-- if user_signed_in? && current_user.role == 'admin'
+- if user_signed_in? && current_user.role != 'admin'
   %li.dropdown
     %a.dropdown-toggle{href: "bootstrap-elements.html", 'data-target'=>"#", 'data-toggle'=>"dropdown"}
       Меню админа

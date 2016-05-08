@@ -2,24 +2,24 @@
   .row
     .jumbotron
       .col-sm-4
-        %a{:href => "#"}
-          %img.img-responsive{:src => "http://placehold.it/1280X720"}/
+        = image_tag 'new.jpg', 'width'=> '350px'
       .col-sm-8
         %h3.title= @article.title
         %p.text-muted
           %span.glyphicon.glyphicon-calendar
-          = @article.created_at
+          = @article.created_at.strftime("%d %b %Y")
           %span.glyphicon.glyphicon-eye-open
           #{@visits} visits
         %p= @article.description
-        %p.text-muted
-          Presented by #{link_to @article.user.name, @article.user}
       - if current_user || @article.access_to_description == true
         %p= @article.full_text
       - else
         %h4
           = link_to 'Sign in', new_user_session_path
           in for more info.
+          
+      %p.text-muted
+        Presented by #{link_to @article.user.name, @article.user}
       %h4
         %span.glyphicon.glyphicon-heart
         %span#rating= @article.votes_for.size

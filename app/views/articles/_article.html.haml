@@ -1,0 +1,15 @@
+= link_to '#', class: 'btn btn-default',
+               "data-target" => ('#' + article.id.to_s),
+               "data-toggle" => "modal" do
+  .col-md-3
+    = image_tag 'new.jpg', 'width'=> '50px', class: 'avatar-small'
+  .col-md-9
+    .label-profile
+      .text
+      - if article.title?
+        %h5.no-margin= truncate(article.title, length: 15)
+      - else
+        %h5.no-margin No title
+      .text
+        %h5.no-margin= truncate(article.description, length: 25)
+= render partial: 'modal_info', locals: {article: article}

@@ -1,32 +1,39 @@
 = simple_form_for @article, :html => { :class => "form-horizontal article" } do |f|
 
   .form-group
-    = f.label :title, :class => 'control-label col-lg-2'
+    = f.label 'Заголовок', :class => 'control-label col-lg-2'
     .col-lg-10
       = f.text_field :title, :class => 'form-control'
   .form-group
-    = f.label :description, :class => 'control-label col-lg-2'
+    = f.label 'Краткое описание', :class => 'control-label col-lg-2'
     .col-lg-10
       = f.text_field :description, :class => 'form-control'
   .form-group
-    = f.label :full_text, :class => 'control-label col-lg-2'
+    = f.label 'Полный текст', :class => 'control-label col-lg-2'
     .col-lg-10
       = f.text_area :full_text, :class => 'form-control'
   .form-group
-    = f.label :category, :class => 'control-label col-lg-2'
+    = f.label 'Категория', :class => 'control-label col-lg-2'
     .col-lg-10
       = f.collection_select(:category_id, Category.all, :id, :title)
   .form-group
-    = f.label 'Access mask', :class => 'control-label col-lg-2'
+    = f.label 'Маска доступа', :class => 'control-label col-lg-2'
     .col-lg-10
-      = f.check_box :hidden
-      = f.label(:hide, "Hide from unregisted users")
+      .checkbox
+        %label
+          = f.check_box :hidden
+          = f.label(:hide, "Скрыть от незарегистрированных пользователей")
   #article_access.form-group
-    .col-lg-offset-2.col-lg-10
-      = f.radio_button(:access_to_description, false)
-      = f.label(:only_title, "Show only title")
-      = f.radio_button(:access_to_description, true)
-      = f.label(:title_and_descr, "Show title and description")
+    .col-lg-10 
+      .col-md-10.col-md-offset-2
+        .radio.radio-primary
+          %label
+            = f.radio_button(:access_to_description, false)
+            Показать только описание
+        .radio.radio-primary
+          %label
+            = f.radio_button(:access_to_description, true)
+            Показать всю новость
   .form-group
     = f.label :tag_list, :class => 'control-label col-lg-2'
     .col-lg-10
@@ -34,5 +41,5 @@
   = f.hidden_field :user_id,   class: current_user.id
   .form-group
     .col-lg-offset-2.col-lg-10
-      = f.submit nil, :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), articles_path, :class => 'btn btn-default'
+      = f.submit 'Создать', :class => 'btn btn-primary'
+      = link_to 'Отмена', articles_path, :class => 'btn btn-default'

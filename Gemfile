@@ -10,7 +10,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem "react_on_rails", "~> 5"
 
-
 gem 'figaro'
 gem 'devise'
 gem 'simple_form'
@@ -56,6 +55,7 @@ gem 'faker'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'byebug'
+  gem 'railroady'
 end
 
 group :development do

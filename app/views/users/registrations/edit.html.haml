@@ -42,6 +42,11 @@
           .col-md-8
             = f.text_field :phone, autocomplete: 'on', class: 'form-control', id: 'inputPhone'
         .form-group
+          %label.col-md-3.control-label{for: "inputRole", class: 'col-md-2 control-label'}
+            Your language
+          .col-md-8
+            = f.select :locale, [['English', 'en'], ['Russian', 'ru']], {}, {class: 'form-control'}
+        .form-group
           %label.col-md-3.control-label{for: 'inputPassword'}
             = t('.password')+':'
           .col-md-8
@@ -51,6 +56,11 @@
             = t('.password_confirmation')+':'
           .col-md-8
             = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', id: 'inputPasswordConfirmation'
+        .form-group
+          %label.col-md-3.control-label{for: 'inputPasswordConfirmation'}
+            = t('.current_password')+':'
+          .col-md-8
+            = f.password_field :current_password, autocomplete: 'off', class: 'form-control', id: 'inputPasswordConfirmation'
         .form-group
           %label.col-md-3.control-label
           .col-md-8

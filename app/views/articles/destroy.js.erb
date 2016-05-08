@@ -1,1 +1,2 @@
-$('#article_<%= @article.id %>  :input').prop('disabled', true);
+$('#article_<%= @article.id %>').addClass('danger');
+$('#article_<%= @article.id %>').find('a').addClass('disabled').prop("disabled",true);

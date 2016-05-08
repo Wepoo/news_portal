@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
-  helper_method :sort_column, :sort_direction, :certificates_sort_column, :certificates_sort_direction
+  helper_method :sort_column, :sort_direction
   # before_action :set_commentator, only: :show
   # GET /articles
   # GET /articles.json
@@ -98,13 +98,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def certificates_sort_column
-    %w[articles.rating articles.title created_at].include?(params[:order]) ? params[:order] : 'created_at'
-  end
-
-  def certificates_sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
-  end
 
   def sort_column
     %w[articles.title created_at articles.rating].include?(params[:order]) ? params[:order] : 'created_at'
