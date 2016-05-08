@@ -14,6 +14,5 @@ class Article < ActiveRecord::Base
   scope :published, -> { where(published: true) }
 
   scope :hidden, -> { where(hidden: false) }
-
+  
 end
-

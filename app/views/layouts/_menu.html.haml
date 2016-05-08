@@ -1,0 +1,25 @@
+%li.dropdown
+  %a.dropdown-toggle{href: "bootstrap-elements.html", 'data-target'=>"#", 'data-toggle'=>"dropdown"}
+    Новости
+    %b.caret
+  %ul.dropdown-menu
+    %li
+      = link_to "Мои новости", current_user
+    %li
+      = link_to "Cоздать новость", new_article_path
+    %li.divider
+    %li
+      = link_to "Новости из Feedjira", feeds_index_path
+
+- if user_signed_in? && current_user.role != 'admin'
+  %li.dropdown
+    %a.dropdown-toggle{href: "bootstrap-elements.html", 'data-target'=>"#", 'data-toggle'=>"dropdown"}
+      Меню админа
+      %b.caret
+    %ul.dropdown-menu
+      %li
+        = link_to suggested_path do
+          = t 'articles.suggested'
+      %li
+        = link_to categories_path do
+          = t 'categories'

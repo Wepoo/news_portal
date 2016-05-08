@@ -3,38 +3,22 @@ class ArticlesController < ApplicationController
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
 
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+
+  helper_method :sort_column, :sort_direction
   # before_action :set_commentator, only: :show
   # GET /articles
   # GET /articles.json
   def index
     if params[:tag]
-      @articles = Article.tagged_with(params[:tag])
+      @articles = Article.tagged_with(params[:tag]).order(sort_column + ' ' + sort_direction)
     else
-      @articles = Article.tagged_with(params[:tag])
+      @articles = Article.tagged_with(params[:tag]).order(sort_column + ' ' + sort_direction)
       if current_user
-        @articles = Article.published
+        @articles = Article.published.order(sort_column + ' ' + sort_direction)
       else
-        @articles = Article.published.hidden
+        @articles = Article.published.hidden.order(sort_column + ' ' + sort_direction)
       end
     end
-  end
-
-  def last_updated
-    if current_user
-      @articles = Article.published.order(updated_at: :desc)
-    else
-      @articles = Article.published.hidden.order(updated_at: :desc)
-    end
-    render 'index'
-  end
-
-  def interesting
-    if current_user
-      @articles = Article.published.order(rating: :desc)
-    else
-      @articles = Article.published.hidden.order(rating: :desc)
-    end
-    render 'index'
   end
 
   def suggested
@@ -112,6 +96,15 @@ class ArticlesController < ApplicationController
       format.json { head :no_content }
       format.js
     end
+  end
+
+
+  def sort_column
+    %w[articles.title created_at articles.rating].include?(params[:order]) ? params[:order] : 'created_at'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   end
 
   private

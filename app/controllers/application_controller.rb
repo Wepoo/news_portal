@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
 
   def track_action
     ahoy.track "Processed #{controller_name}##{action_name}", request.filtered_parameters
+  rescue
+    
   end
 
   def set_user_language

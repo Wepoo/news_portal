@@ -1,0 +1,45 @@
+= simple_form_for @article, :html => { :class => "form-horizontal article" } do |f|
+
+  .form-group
+    = f.label 'Заголовок', :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :title, :class => 'form-control'
+  .form-group
+    = f.label 'Краткое описание', :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :description, :class => 'form-control'
+  .form-group
+    = f.label 'Полный текст', :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_area :full_text, :class => 'form-control'
+  .form-group
+    = f.label 'Категория', :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.collection_select(:category_id, Category.all, :id, :title)
+  .form-group
+    = f.label 'Маска доступа', :class => 'control-label col-lg-2'
+    .col-lg-10
+      .checkbox
+        %label
+          = f.check_box :hidden
+          = f.label(:hide, "Скрыть от незарегистрированных пользователей")
+  #article_access.form-group
+    .col-lg-10 
+      .col-md-10.col-md-offset-2
+        .radio.radio-primary
+          %label
+            = f.radio_button(:access_to_description, false)
+            Показать только описание
+        .radio.radio-primary
+          %label
+            = f.radio_button(:access_to_description, true)
+            Показать всю новость
+  .form-group
+    = f.label :tag_list, :class => 'control-label col-lg-2'
+    .col-lg-10
+      = f.autocomplete_field :tag_list, autocomplete_tag_name_articles_path, :"data-delimiter" => ', '
+  = f.hidden_field :user_id,   class: current_user.id
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = f.submit 'Создать', :class => 'btn btn-primary'
+      = link_to 'Отмена', articles_path, :class => 'btn btn-default'
